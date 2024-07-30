@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "../../Schema/UserSchema";
 import { useMutation, useQueryClient } from "react-query";
 import { http } from "../../../api";
+import { SvgSpinners3DotsBounce} from "../spinner/spinner";
 
 export default function FormList() {
   const contextData = useContext(RootContext);
@@ -105,7 +106,7 @@ export default function FormList() {
                     errors.lastName ||
                     errors.phoneNumber ||
                     errors.email
-                      ? "absolute right-[-280px] top-0 z-10 flex flex-col items-end bg-white/30 p-4 rounded-lg w-fit h-auto"
+                      ? "absolute right-[-330px] top-0 z-10 flex flex-col items-end bg-white/30 p-4 rounded-lg w-fit h-auto"
                       : "hidden"
                   }
                 >
@@ -168,7 +169,7 @@ export default function FormList() {
                   placeholder="ایمیل ..."
                 />
                 <button
-                className="py-3 px-5 text-white bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg border-2"
+                className="flex items-center justify-center py-3 px-5 text-white bg-gradient-to-r from-emerald-500 to-lime-600 rounded-lg border-2"
                 //   className={` ${
                 //     !(isValid && dirty)
                 //       ? "py-3 px-5 text-white bg-gray-500 rounded-lg border-2"
@@ -177,7 +178,7 @@ export default function FormList() {
                   type="submit"
                 >
                    
-                  {contextData.editMode ? "تصیح کردن" : "اضافه کردن"}
+                  {contextData.editMode ? "تصیح کردن" :createCartMutation.isLoading ? <SvgSpinners3DotsBounce/> : "اضافه کردن"}
                 </button>
               </form>  
       </div>
