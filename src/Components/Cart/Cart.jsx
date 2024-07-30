@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { RootContext } from "../../Context/RootContextProvider"
 import { useMutation, useQueryClient } from "react-query"
 import { http } from "../../../api"
-import { SvgSpinnersBlocksShuffle2 } from "../spinner/spinner"
+import { SvgSpinnersBarsRotateFade, SvgSpinnersBlocksShuffle2 } from "../spinner/spinner"
 
 
 export default function Cart({detailUser}) {
@@ -39,6 +39,11 @@ export default function Cart({detailUser}) {
         {contextData.editMode ? <div><SvgSpinnersBlocksShuffle2/></div> : <button onClick={()=>contextData.setEditMode({...detailUser,id:detailUser.id})}><i className="fa-regular fa-pen-to-square"></i></button>}
     </div>
     </div>
+     :
+     isLoading ?
+     <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white p-4">
+     <SvgSpinnersBarsRotateFade/>
+     </div>
      : 
      <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white p-4">
       <p dir="ltr">Do you want delete this contact ?</p>
