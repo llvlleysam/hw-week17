@@ -1,27 +1,30 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import Cart from './Components/Cart/Cart'
 import FormList from './Components/Form/Form'
-import { RootContext } from './Context/RootContextProvider'
 import { useQuery } from 'react-query'
 import { http } from '../api'
-import axios from 'axios'
 import { SvgSpinners3DotsBounce, SvgSpinnersBarsScaleFade, SvgSpinnersBlocksShuffle2 } from './Components/spinner/spinner'
 
 function App() {
-  // const contextData = useContext(RootContext)
   const [searchValue,setSearchValue]=useState("")
   const [searchBtn,setSearchBtn]=useState("")
   const [pageCounter,setPageCounter]=useState(1)
   // Fetch cart & Search
   async function getCart(){
     const response = await http.get(`/users?firstName_like=${searchBtn}&_page=${pageCounter}&_limit=4`)
-    return response.data
+    return response
   }
   const {data,isLoading}=useQuery({queryKey:["carts",searchBtn,pageCounter],queryFn:getCart})
   // Paginate
-  function nextBtn(){setPageCounter(pageCounter+1)}
-  function prevBtn(){ pageCounter>1 ? setPageCounter(pageCounter-1):""}
+  async function nextBtn(){
+    const limit=4
+    const totalItems= await data.headers.get("X-Total-Count")
+    const totalPage= Math.ceil(totalItems/limit)
+    if(pageCounter < totalPage){
+      setPageCounter(pageCounter+1)}
+    }
+  function prevBtn(){pageCounter > 1 ? setPageCounter(pageCounter-1):""}
   return (
     <div className='w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4'>
       <div className='w-full flex flex-col items-center gap-4'>
@@ -32,7 +35,7 @@ function App() {
       </div>
       </div>
       {isLoading ?<div><SvgSpinnersBarsScaleFade/></div> :<div className='w-full grid grid-cols-4 gap-4 p-4'>
-        {data?.map(item=><Cart key={item.id} detailUser={item} />)}
+        {data.data?.map(item=><Cart key={item.id} detailUser={item} />)}
       </div>}
       <div className='bottom-0 fixed flex justify-center items-center h-16 w-48 rounded-tl-2xl rounded-tr-2xl gap-4 bg-gradient-to-b to-red-400 from-red-900 drop-shadow-lg'>
         <button onClick={nextBtn} className='text-3xl text-white/40 transition-all delay-100 hover:text-white'><i className="fa-solid fa-caret-right "></i></button>
