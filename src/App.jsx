@@ -12,12 +12,16 @@ function App() {
   // const contextData = useContext(RootContext)
   const [searchValue,setSearchValue]=useState("")
   const [searchBtn,setSearchBtn]=useState("")
+  const [pageCounter,setPageCounter]=useState(1)
+  // Fetch cart & Search
   async function getCart(){
-    const response = await http.get(`/users?firstName_like=${searchBtn}`)
+    const response = await http.get(`/users?firstName_like=${searchBtn}&_page=${pageCounter}&_limit=4`)
     return response.data
   }
-  const {data,isLoading}=useQuery({queryKey:["carts",searchBtn],queryFn:getCart})
-
+  const {data,isLoading}=useQuery({queryKey:["carts",searchBtn,pageCounter],queryFn:getCart})
+  // Paginate
+  function nextBtn(){setPageCounter(pageCounter+1)}
+  function prevBtn(){ pageCounter>1 ? setPageCounter(pageCounter-1):""}
   return (
     <div className='w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4'>
       <div className='w-full flex flex-col items-center gap-4'>
@@ -30,6 +34,11 @@ function App() {
       {isLoading ?<div><SvgSpinnersBarsScaleFade/></div> :<div className='w-full grid grid-cols-4 gap-4 p-4'>
         {data?.map(item=><Cart key={item.id} detailUser={item} />)}
       </div>}
+      <div className='bottom-0 fixed flex justify-center items-center h-16 w-48 rounded-tl-2xl rounded-tr-2xl gap-4 bg-gradient-to-b to-red-400 from-red-900 drop-shadow-lg'>
+        <button onClick={nextBtn} className='text-3xl text-white/40 transition-all delay-100 hover:text-white'><i className="fa-solid fa-caret-right "></i></button>
+        <p className='text-white font-bold text-2xl'>{pageCounter}</p>
+        <button onClick={prevBtn} className='text-3xl text-white/40 transition-all delay-100 hover:text-white'><i className="fa-solid fa-caret-left"></i></button>
+      </div>
     </div>
   )
 }
