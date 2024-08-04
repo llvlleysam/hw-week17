@@ -59,7 +59,7 @@ function App() {
     }
      console.log(getPageNumbers())
   return (
-    <div className='w-full h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4'>
+    <div className='w-full lg:h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4 overflow-y-scroll'>
       <button onClick={toggleTheme} className='fixed top-0 bg-white dark:bg-black p-2 rounded-full'>{theme==="Dark"?"Light Mode" : "Dark Mode"}</button>
       <div className='w-full flex flex-col items-center gap-4'>
       <FormList/>
