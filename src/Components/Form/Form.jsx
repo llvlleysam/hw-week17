@@ -96,9 +96,9 @@ export default function FormList() {
   return (
     <>
       {/* <ToastContainer position="top-right" /> */}
-       <div className="flex flex-col w-2/5 h-auto bg-gradient-to-b from-red-400 to-red-900 p-3 gap-3 rounded-2xl drop-shadow-lg mt-10">
+       <div className="flex flex-col w-4/5 md:h-4/5 lg:w-2/5 h-auto bg-gradient-to-b from-red-400 to-red-900 p-3 gap-3 rounded-2xl drop-shadow-lg mt-10">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <h1 className="font-bold text-xl">وب اپلیکیشن مدیریت مخاطبین</h1>
+        <h1 className="font-bold text-base md:text-xl lg:text-xl">وب اپلیکیشن مدیریت مخاطبین</h1>
                 {/* div show errors */}
                 <div
                   className={
@@ -185,57 +185,3 @@ export default function FormList() {
     </>
   );
 }
-
-
-
-{/* <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            phoneNumber: "",
-            kinship: "",
-            email: "",
-          }}
-          onSubmit={(values) => {
-            if (!contextData.editMode) {
-              notify(values.firstName, values.lastName);
-              const newUser = {
-                id: Math.floor(Math.random() * 10000),
-                firstName: values.firstName,
-                lastName: values.lastName,
-                phoneNumber: values.phoneNumber,
-                kinship: values.kinship,
-                email: values.email,
-              };
-              contextData.setContextState([
-                ...contextData.contextState,
-                newUser,
-              ]);
-              emptyValuesForm(values);
-            } else {
-              contextData.setContextState((prev) => {
-                contextData.setEditMode(null);
-                return prev.map((user) =>
-                  user.id == contextData.editMode
-                    ? { ...user, ...values }
-                    : user
-                );
-              });
-              emptyValuesForm(values);
-            }
-          }}
-          validationSchema={Yup.object({
-            firstName: Yup.string().required().min(3, "name is short"),
-            lastName: Yup.string().required(),
-            phoneNumber: Yup.number()
-              .required()
-              .min(7, "your Phone number is not correct!")
-              .positive()
-              .integer(),
-            email: Yup.string().required().email(),
-          })}
-        >
-          {({ errors, isValid, dirty }) => {
-            
-          }}
-        </Formik> */}
