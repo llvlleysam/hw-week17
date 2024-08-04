@@ -46,14 +46,14 @@ export default function RootContextProvider({children}) {
         },
     ])
     const [editMode,setEditMode]=useState(null)
-    const [theme,setTheme]=useState(localStorage.getItem("theme") || "Light")
+    const [theme,setTheme]=useState(localStorage.getItem("theme") || "light")
     useEffect(()=>{
         document.documentElement.classList.add(theme)
         localStorage.setItem("theme",theme)
         return()=>document.documentElement.classList.remove(theme)
     },[theme])
     function toggleTheme(){
-        setTheme(prev=>prev === "Light" ? "Dark" : "Light" )
+        setTheme(prev=>prev === "light" ? "dark" : "light" )
     }
   return (
     <div>
