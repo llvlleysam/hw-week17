@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export const RootContext = createContext()
 
@@ -46,9 +46,18 @@ export default function RootContextProvider({children}) {
         },
     ])
     const [editMode,setEditMode]=useState(null)
+    const [theme,setTheme]=useState(localStorage.getItem("theme") || "Light")
+    useEffect(()=>{
+        document.documentElement.classList.add(theme)
+        localStorage.setItem("theme",theme)
+        return()=>document.documentElement.classList.remove(theme)
+    },[theme])
+    function toggleTheme(){
+        setTheme(prev=>prev === "Light" ? "Dark" : "Light" )
+    }
   return (
     <div>
-        <RootContext.Provider value={{contextState, setContextState,editMode,setEditMode}}>
+        <RootContext.Provider value={{contextState, setContextState,editMode,setEditMode,toggleTheme,theme}}>
             {children}
         </RootContext.Provider>
     </div>
