@@ -27,7 +27,7 @@ export default function Cart({detailUser}) {
 
   return (
     <>
-    {showModal ? <div id={detailUser.id} className="flex col-span-4 md:col-span-2 lg:col-span-1 gap-5 justify-between bg-gradient-to-r from-red-500 to-orange-500 rounded-lg p-4 text-white drop-shadow-lg">
+    {showModal ? <div id={detailUser.id} className="flex col-span-4 md:col-span-2 lg:col-span-1 gap-5 justify-between bg-gradient-to-r from-red-500 to-orange-500 rounded-lg p-4 text-white drop-shadow-lg dark:from-purple-500 dark:to-purple-900 transition duration-300">
       <div className="flex flex-col gap-2 items-start">
         <p className="font-bold text-xl">{`${detailUser.firstName} ${detailUser.lastName}`}</p>
         <p>{detailUser.phoneNumber}</p>

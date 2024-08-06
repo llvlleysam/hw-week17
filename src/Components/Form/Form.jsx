@@ -10,6 +10,7 @@ import { userSchema } from "../../Schema/UserSchema";
 import { useMutation, useQueryClient } from "react-query";
 import { http } from "../../../api";
 import { SvgSpinners3DotsBounce} from "../spinner/spinner";
+import './style.css'
 
 export default function FormList() {
   const contextData = useContext(RootContext);
@@ -92,13 +93,21 @@ export default function FormList() {
       setValue("kinship",contextData.editMode.kinship)
       setValue("email",contextData.editMode.email)
   }
-
+  const {theme, toggleTheme}=useContext(RootContext)
   return (
     <>
       {/* <ToastContainer position="top-right" /> */}
-       <div className="flex flex-col w-4/5 md:h-4/5 lg:w-2/5 h-auto bg-gradient-to-b from-red-400 to-red-900 p-3 gap-3 rounded-2xl drop-shadow-lg mt-10">
+       <div className="flex flex-col w-4/5 md:h-4/5 lg:w-2/5 h-auto bg-gradient-to-b from-red-400 to-red-900 dark:from-blue-600 dark:to-violet-600 p-3 gap-3 rounded-2xl drop-shadow-lg mt-10">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <h1 className="font-bold text-base md:text-xl lg:text-xl">وب اپلیکیشن مدیریت مخاطبین</h1>
+          <div className="flex justify-between">
+        <h1 className="font-bold text-base md:text-xl lg:text-xl dark:text-white">وب اپلیکیشن مدیریت مخاطبین</h1>
+        <label htmlFor="dark" className="switch">
+          <input onClick={()=>toggleTheme()} className="mr-2" type="checkbox" id="dark" checked={theme=="dark"}/>
+          <span class="slider round relative">
+            <img className="w-[16px] absolute top-1 right-1" src="/sun.svg" alt="" />
+            <img className="w-[16px] absolute top-1 left-1" src="/moon.png" alt="" />
+          </span>
+        </label></div>
                 {/* div show errors */}
                 <div
                   className={
