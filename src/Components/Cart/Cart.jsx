@@ -27,7 +27,7 @@ export default function Cart({detailUser}) {
 
   return (
     <>
-    {showModal ? <div id={detailUser.id} className="flex col-span-4 md:col-span-2 lg:col-span-1 gap-5 justify-between bg-gradient-to-r from-red-500 to-orange-500 rounded-lg p-4 text-white drop-shadow-lg dark:from-purple-500 dark:to-purple-900 transition duration-300">
+    {showModal ? <div id={detailUser.id} className="flex col-span-4 md:col-span-2 lg:col-span-1 gap-5 justify-between bg-gradient-to-r from-red-500 to-orange-500 rounded-lg p-4 text-white drop-shadow-lg dark:from-purple-500 dark:to-purple-900 transition duration-300 hover:rotate-2">
       <div className="flex flex-col gap-2 items-start">
         <p className="font-bold text-xl">{`${detailUser.firstName} ${detailUser.lastName}`}</p>
         <p>{detailUser.phoneNumber}</p>
@@ -45,7 +45,7 @@ export default function Cart({detailUser}) {
      <SvgSpinnersBarsRotateFade/>
      </div>
      : 
-     <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white p-4">
+     <div className="flex flex-col items-center justify-center gap-6 rounded-lg bg-white p-4 hover:rotate-2 transition duration-300">
       <p dir="ltr">Do you want delete this contact ?</p>
       <div className="flex gap-2 justify-center">
       <button onClick={()=>mutate(detailUser.id)} className="py-1 px-3 bg-red-500 rounded-xl text-white hover:bg-red-700 transition-all delay-75">Yes</button>

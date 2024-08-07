@@ -22,6 +22,7 @@ function App() {
     }
   }
   const {data,isLoading}=useQuery({queryKey:["carts",searchBtn,pageCounter],queryFn:getCart})
+  console.log(data)
   // Paginate
   // function nextBtn(){
   //   const limit=4
@@ -59,13 +60,13 @@ function App() {
     }
      console.log(getPageNumbers())
   return (
-    <div className='w-full lg:h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4 dark:from-blue-300 dark:to-blue-800 transition duration-300'>
+    <div className='w-full h-full lg:h-screen flex flex-col items-center justify-center bg-gradient-to-r from-red-400 to-red-900 gap-4 dark:from-blue-300 dark:to-blue-800 transition-all duration-300'>
       {/* <button onClick={toggleTheme} className='fixed top-0 bg-white p-2 rounded-full z-10'>{theme==="dark"?"Light Mode" : "Dark Mode"}</button> */}
       <div className='w-full flex flex-col items-center gap-4'>
       <FormList/>
       <div className='w-4/5  md:w-4/5 lg:w-2/5 flex flex-row-reverse gap-2 bg-gradient-to-r to-red-400 from-red-900 rounded-2xl drop-shadow-lg p-4 dark:to-blue-600 dark:from-violet-600 transition duration-300'>
         <input onChange={(e)=>setSearchValue(e.target.value)} className='py-2 rounded-lg drop-shadow-lg w-full border-black border-2' type="text" />
-        <button onClick={()=>setSearchBtn(searchValue)} className='px-4 transition-all bg-purple-700 hover:bg-purple-500 text-white rounded-lg drop-shadow-lg'>{ isLoading && searchValue!=="" ? <SvgSpinners3DotsBounce/> :"جستجو"}</button>
+        <button onClick={()=>setSearchBtn(searchValue)} className='px-4 transition-all hover:scale-105 bg-purple-700 hover:bg-purple-500 text-white rounded-lg drop-shadow-lg'>{ isLoading && searchValue!=="" ? <SvgSpinners3DotsBounce/> :"جستجو"}</button>
       </div>
       </div>
       {isLoading ?<div className='w-full grid grid-cols-4 gap-4 p-4'>{Array.from({length:4}).map(index=><SkeletonCard key={index}/>)}</div> :<div className='w-full grid grid-cols-4 gap-4 p-4'>
